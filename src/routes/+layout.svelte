@@ -8,5 +8,14 @@
 <svelte:head>
 	<link rel="icon" href={favicon} />
 </svelte:head>
+<div class="">
+	<div class="flex h-screen flex-col container mx-auto">
+		<div class="flex-1">
+			{@render children?.()}
+		</div>
 
-{@render children?.()}
+		<div class="p-4">
+			<p>Bottom Content...........</p>
+		</div>
+	</div>
+</div>
