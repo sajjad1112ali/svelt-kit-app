@@ -1,81 +1,102 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
-	let todos: any[] = [];
-	let newTodo = '';
+  import { onMount } from 'svelte';
 
-	async function loadTodos() {
-		const res = await fetch('api/todos');
-		todos = await res.json();
-	}
+  type Todo = {
+    id: number;
+    title: string;
+    completed: boolean;
+  };
 
-	async function addTodo() {
-		if (!newTodo) return;
-		await fetch('api/todos', {
-			method: 'POST',
-			headers: { 'Content-Type': 'application/json' },
-			body: JSON.stringify({ title: newTodo })
-		});
-		newTodo = '';
-		await loadTodos();
-	}
+  let todos: Todo[] = [];
+  let newTodo = '';
 
-	onMount(loadTodos);
+  // Small helper for JSON fetch
+  async function api<T>(url: string, options?: RequestInit): Promise<T> {
+    const res = await fetch(url, options);
+    if (!res.ok) throw new Error(`API error: ${res.status}`);
+    return res.json();
+  }
 
-	async function toggleCompleted(event: Event) {
-		const checkbox = event.target as HTMLInputElement;
-		const id = checkbox.dataset.id; // 👈 access the data-id
-		const checked = checkbox.checked;
+  // Load all todos once
+  onMount(async () => {
+    todos = await api<Todo[]>('/api/todos');
+  });
 
-		const res = await fetch(`/api/todos/${id}`, {
-			method: 'PUT',
-			headers: { 'Content-Type': 'application/json' },
-			body: JSON.stringify({ completed: checked })
-		});
+  // Add new todo
+  async function addTodo() {
+    if (!newTodo.trim()) return;
 
-		if (res.ok) {
-			const updated = await res.json();
-			// todo = updated; // ✅ update local todo object
-		} else {
-			console.error('Failed to update todo');
-		}
-	}
+    const created = await api<Todo>('/api/todos', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ title: newTodo })
+    });
 
-	async function deleteTodo(event: Event) {
-      const button = event.currentTarget as HTMLButtonElement;
-  
-    const id = button.dataset.id;
+    todos = [created, ...todos];
+    newTodo = '';
+  }
 
-		const res = await fetch(`/api/todos/${id}`, {
-			method: 'DELETE'
-		});
+  async function toggleCompleted(event: Event) {
+    const checkbox = event.currentTarget as HTMLInputElement;
+    const id = Number(checkbox.dataset.id);
+    const checked = checkbox.checked;
 
-		if (res.ok) {
-		await loadTodos();
-		} else {
-			console.error('Failed to delete todo');
-		}
-	}
+    const updated = await api<Todo>(`/api/todos/${id}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ completed: checked })
+    });
+
+    todos = todos.map((t) => (t.id === id ? updated : t));
+  }
+
+  async function deleteTodo(event: Event) {
+    const button = event.currentTarget as HTMLButtonElement;
+    const id = Number(button.dataset.id);
+
+    await fetch(`/api/todos/${id}`, { method: 'DELETE' });
+
+    todos = todos.filter((t) => t.id !== id);
+  }
 </script>
 
-<h1 class="text-2xl font-bold">Todos</h1>
+<h1 class="text-2xl font-bold mb-4">Todos</h1>
 
-<input bind:value={newTodo} placeholder="New todo..." class="border px-2 py-1" />
-<button on:click={addTodo} class="ml-2 bg-blue-500 px-4 py-1 text-white"> Add </button>
+<div class="flex gap-2 mb-4">
+  <input
+    bind:value={newTodo}
+    placeholder="New todo..."
+    class="border px-2 py-1 flex-1"
+  />
+  <button
+    on:click={addTodo}
+    class="bg-blue-500 px-4 py-1 text-white rounded"
+  >
+    Add
+  </button>
+</div>
 
-<ul>
-	{#each todos as todo}
-		<li class="border border-gray-400 flex items-center justify-between">
-			<div>
+<ul class="space-y-2">
+  {#each todos as todo (todo.id)}
+    <li class="flex items-center justify-between border px-2 py-1 rounded">
+      <div class="flex items-center gap-2">
         <input
-				type="checkbox"
-				data-id={todo.id}
-				checked={todo.completed}
-				on:change={toggleCompleted}
-			/>
-			{todo.title}
+          type="checkbox"
+          data-id={todo.id}
+          checked={todo.completed}
+          on:change={toggleCompleted}
+        />
+        <span class={todo.completed ? 'line-through text-gray-500' : ''}>
+          {todo.title}
+        </span>
       </div>
-			<button data-id={todo.id}
- on:click={deleteTodo} class="ml-2 text-red-500">✕</button>
-		</li>
-	{/each}
+      <button
+        data-id={todo.id}
+        on:click={deleteTodo}
+        class="text-red-500 hover:text-red-700"
+      >
+        ✕
+      </button>
+    </li>
+  {/each}
 </ul>
