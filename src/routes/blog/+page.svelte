@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-
+	import { page } from '$app/stores';
+	$: id = $page.params.blogId;
 	interface User {
 		id: number;
 		name: string;
@@ -57,6 +58,8 @@
 	}
 
 	onMount(async () => {
+	console.log(id);
+
 		posts = await api<Post[]>('http://localhost:8080/api/v1/posts');
 		console.log(posts);
 	});
@@ -64,25 +67,19 @@
 
 <h1 class="mb-4 text-2xl font-bold">Blog</h1>
 
-<!-- 
-<ul class="space-y-2">
-  {#each posts as post (post.id)}
-    <p>{post.title}</p>
-  {/each}
-</ul> -->
 <div class="grid grid-cols-1 gap-x-7.5 gap-y-11 sm:grid-cols-2 lg:grid-cols-3">
 	{#each posts as post (post.id)}
 		<div class="group">
 			<div class="mb-6 overflow-hidden rounded-[10px] transition-all group-hover:scale-105">
-					<img
-						src="https://clarity-tailwind.preview.uideck.com/images/blog-single-01.png"
-						class="w-full"
-            alt={post.title+ 'image'}
-					/>
+				<img
+					src="https://clarity-tailwind.preview.uideck.com/images/blog-single-01.png"
+					class="w-full"
+					alt={post.title + 'image'}
+				/>
 			</div>
 
 			<h3>
-				<a href="blog-single.html" class="text-dark mb-3.5 block text-xl font-bold">
+				<a href={`/blog/${post.id}`} class="text-dark mb-3.5 block text-xl font-bold">
 					<span
 						class="from-primary/50 to-primary/40 bg-linear-to-r bg-[length:0px_10px] bg-left-bottom bg-no-repeat transition-[background-size] duration-500 group-hover:bg-[length:100%_10px] hover:bg-[length:100%_3px]"
 					>
