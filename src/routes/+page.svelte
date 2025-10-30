@@ -1,102 +1,71 @@
-<script lang="ts">
-  import { onMount } from 'svelte';
-
-  type Todo = {
-    id: number;
-    title: string;
-    completed: boolean;
-  };
-
-  let todos: Todo[] = [];
-  let newTodo = '';
-
-  // Small helper for JSON fetch
-  async function api<T>(url: string, options?: RequestInit): Promise<T> {
-    const res = await fetch(url, options);
-    if (!res.ok) throw new Error(`API error: ${res.status}`);
-    return res.json();
-  }
-
-  // Load all todos once
-  onMount(async () => {
-    todos = await api<Todo[]>('/api/todos');
-  });
-
-  // Add new todo
-  async function addTodo() {
-    if (!newTodo.trim()) return;
-
-    const created = await api<Todo>('/api/todos', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ title: newTodo })
-    });
-
-    todos = [created, ...todos];
-    newTodo = '';
-  }
-
-  async function toggleCompleted(event: Event) {
-    const checkbox = event.currentTarget as HTMLInputElement;
-    const id = Number(checkbox.dataset.id);
-    const checked = checkbox.checked;
-
-    const updated = await api<Todo>(`/api/todos/${id}`, {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ completed: checked })
-    });
-
-    todos = todos.map((t) => (t.id === id ? updated : t));
-  }
-
-  async function deleteTodo(event: Event) {
-    const button = event.currentTarget as HTMLButtonElement;
-    const id = Number(button.dataset.id);
-
-    await fetch(`/api/todos/${id}`, { method: 'DELETE' });
-
-    todos = todos.filter((t) => t.id !== id);
-  }
+<script>
+    const websites = [
+        { 
+            id: 1, 
+            title: "Todo App", 
+            description: "A simple page where you can manage your todos.", 
+            color: "bg-indigo-500", 
+            href: "/todos" 
+        },
+        { 
+            id: 2, 
+            title: "Positivus Landing Page", 
+            description: "Professional and modern business site.", 
+            color: "bg-green-500", 
+            href: "/positivus" 
+        },
+        { 
+            id: 3, 
+            title: "Personal Blog", 
+            description: "Minimalist design focused on content.", 
+            color: "bg-red-500", 
+            href: "/blog" 
+        },
+        { 
+            id: 4, 
+            title: "Task Management App UI", 
+            description: "A clean and functional dashboard concept.", 
+            color: "bg-yellow-500", 
+            href: "/dashboard" 
+        },
+    ];
 </script>
 
-<h1 class="text-2xl font-bold mb-4">Todos</h1>
+<section class="py-12 px-4 sm:px-6 lg:px-8 bg-gray-50">
+    <div class="max-w-4xl mx-auto">
+        
+        <h2 class="text-3xl font-extrabold text-gray-900 text-center mb-10">
+            Showcase Projects ✨
+        </h2>
 
-<div class="flex gap-2 mb-4">
-  <input
-    bind:value={newTodo}
-    placeholder="New todo..."
-    class="border px-2 py-1 flex-1"
-  />
-  <button
-    on:click={addTodo}
-    class="bg-blue-500 px-4 py-1 text-white rounded"
-  >
-    Add
-  </button>
-</div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            
+            {#each websites as site (site.id)}
+                <a 
+                    href={site.href}
+                    class="
+                        block p-6 rounded-xl shadow-lg 
+                        hover:shadow-2xl transition duration-300 transform hover:-translate-y-1 
+                        {site.color} text-white
+                        flex flex-col justify-between h-full
+                    "
+                >
+                    <div>
+                        <h3 class="text-2xl font-bold mb-2">
+                            {site.title}
+                        </h3>
+                        <p class="text-lg opacity-90">
+                            {site.description}
+                        </p>
+                    </div>
+                    
+                    <div class="mt-4 text-sm font-semibold flex items-center">
+                        View Project
+                        <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                    </div>
+                </a>
+            {/each}
 
-<ul class="space-y-2">
-  {#each todos as todo (todo.id)}
-    <li class="flex items-center justify-between border px-2 py-1 rounded">
-      <div class="flex items-center gap-2">
-        <input
-          type="checkbox"
-          data-id={todo.id}
-          checked={todo.completed}
-          on:change={toggleCompleted}
-        />
-        <span class={todo.completed ? 'line-through text-gray-500' : ''}>
-          {todo.title}
-        </span>
-      </div>
-      <button
-        data-id={todo.id}
-        on:click={deleteTodo}
-        class="text-red-500 hover:text-red-700"
-      >
-        ✕
-      </button>
-    </li>
-  {/each}
-</ul>
+        </div>
+    </div>
+</section>
