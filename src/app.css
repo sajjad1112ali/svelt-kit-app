@@ -1,2 +1,5 @@
 @import 'tailwindcss';
 @plugin '@tailwindcss/typography';
+.grotesk {
+    font-family: 'Space Grotesk', sans-serif;
+  }
