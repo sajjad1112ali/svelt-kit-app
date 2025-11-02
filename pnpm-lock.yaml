@@ -11,6 +11,15 @@ importers:
       '@prisma/client':
         specifier: ^6.16.1
         version: 6.16.1(prisma@6.16.1(typescript@5.9.2))(typescript@5.9.2)
+      '@splidejs/splide':
+        specifier: ^4.1.4
+        version: 4.1.4
+      '@splidejs/svelte-splide':
+        specifier: 0.1.10
+        version: 0.1.10
+      svelte-light-carousel:
+        specifier: ^2.0.1
+        version: 2.0.1(svelte@5.38.10)
     devDependencies:
       '@eslint/compat':
         specifier: ^1.2.5
@@ -466,6 +475,15 @@ packages:
     resolution: {integrity: sha512-StxAO/8ts62KZVRAm4JZYq9+NqNsV7RvimNK+YM7ry//zebEH6meuugqW/P5OFUCjyQgui+9fUxT6d5NShvMvA==}
     cpu: [x64]
     os: [win32]
+
+  '@splidejs/splide@3.6.12':
+    resolution: {integrity: sha512-ggOUAuSxjWuxxL0IQEZcux26KByfKWfYM2HYmvDBdxkXc5evVW+xuECO+3iuciyrJpgcbYTr4hn0cHfbNlYIeA==}
+
+  '@splidejs/splide@4.1.4':
+    resolution: {integrity: sha512-5I30evTJcAJQXt6vJ26g2xEkG+l1nXcpEw4xpKh0/FWQ8ozmAeTbtniVtVmz2sH1Es3vgfC4SS8B2X4o5JMptA==}
+
+  '@splidejs/svelte-splide@0.1.10':
+    resolution: {integrity: sha512-b0heMrB6iOZQPgGEBqbzXMltGkd7WnQw67tkofOU6ivWd9n0RQOb5AIHg+ztJY1iR8dR28XX1bE3op8wZEKE1A==}
 
   '@standard-schema/spec@1.0.0':
     resolution: {integrity: sha512-m2bOd0f2RT9k8QJx1JN85cZYyH1RqFBdlwtkSlf4tBDYLCiiZnv1fIIwacK6cqwXavOydf0NPToMQgpKq+dVlA==}
@@ -1442,6 +1460,11 @@ packages:
       svelte:
         optional: true
 
+  svelte-light-carousel@2.0.1:
+    resolution: {integrity: sha512-2DF/9L1N/xMzu+xSyUrP9PZfIYz5do/ueVdctejqKsHXtjAmQonnj2GO/mFYxu4B9zGTDdpKqkoCTOgd+z/6xA==}
+    peerDependencies:
+      svelte: ^5.0.0
+
   svelte@5.38.10:
     resolution: {integrity: sha512-UY+OhrWK7WI22bCZ00P/M3HtyWgwJPi9IxSRkoAE2MeAy6kl7ZlZWJZ8RaB+X4KD/G+wjis+cGVnVYaoqbzBqg==}
     engines: {node: '>=18'}
@@ -1845,6 +1868,14 @@ snapshots:
 
   '@rollup/rollup-win32-x64-msvc@4.50.1':
     optional: true
+
+  '@splidejs/splide@3.6.12': {}
+
+  '@splidejs/splide@4.1.4': {}
+
+  '@splidejs/svelte-splide@0.1.10':
+    dependencies:
+      '@splidejs/splide': 3.6.12
 
   '@standard-schema/spec@1.0.0': {}
 
@@ -2757,6 +2788,10 @@ snapshots:
       postcss-scss: 4.0.9(postcss@8.5.6)
       postcss-selector-parser: 7.1.0
     optionalDependencies:
+      svelte: 5.38.10
+
+  svelte-light-carousel@2.0.1(svelte@5.38.10):
+    dependencies:
       svelte: 5.38.10
 
   svelte@5.38.10:

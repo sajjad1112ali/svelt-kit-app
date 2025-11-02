@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import { Splide, SplideSlide } from '@splidejs/svelte-splide';
 	import '@splidejs/splide/css';
 	import SplideTestimonialCard from './SplideTestimonialCard.svelte';
@@ -35,32 +35,84 @@
 			title: 'Operations Lead at Delta Co.'
 		}
 	];
+	let currentIndex = $state(1);
+
+	let splide: any;
+
+	function goNext() {
+		splide.go('+1');
+	}
+
+	function goPrev() {
+		splide.go('-1');
+	}
+
+	function goTo(index: number) {
+		console.log(`index = ${index}`);
+		currentIndex = index;
+		splide.go(index);
+	}
+	$effect(() => {
+		if (!splide?.splide) return;
+		const handler = (newIndex: number) => {
+			currentIndex = newIndex;
+		};
+
+		splide?.splide.on('moved', handler);
+
+		return () => {
+			splide?.splide.off('moved', handler);
+		};
+	});
 </script>
-<div class="bg-[#191A23] py-20 rounded-[60px]">
 
-<Splide
-	options={{
-		type: 'loop',
-		perPage: 1,
-		gap: '3rem',
-		focus: 'center',
-
-		padding: '20rem',
+<div class="my-20 space-y-8 rounded-[60px] bg-[#191A23] py-20">
+	<Splide
+		bind:this={splide}
+		options={{
+			type: 'loop',
+			perPage: 1,
+			gap: '3rem',
+			focus: 'center',
+			pagination: false,
+			arrows: false,
+			padding: '20rem',
 
 			breakpoints: {
 				1280: { padding: '16rem', perPage: 1, gap: '2rem' },
 				1024: { padding: '10rem', perPage: 1, gap: '1.5rem' },
-				768: { padding: '6rem', perPage: 1, gap: '1rem' },
-				480: { padding: '3rem', perPage: 1, gap: '0.5rem' },
+				768: { padding: '.5rem', perPage: 1, gap: '0.5rem' }
 			}
-	}}
->
-	{#each testimonials as testimonial}
-		<SplideSlide
-			>
-			<SplideTestimonialCard {...testimonial} />
-			</SplideSlide
+		}}
+	>
+		{#each testimonials as testimonial}
+			<SplideSlide>
+				<SplideTestimonialCard {...testimonial} />
+			</SplideSlide>
+		{/each}
+	</Splide>
+	<div class="mt-6 flex items-center justify-between">
+		<button
+			onclick={goPrev}
+			class="rounded-full bg-white/10 p-3 text-white transition hover:bg-white/20"
 		>
-	{/each}
-</Splide>
+			←
+		</button>
+
+		<button
+			onclick={goNext}
+			class="rounded-full bg-white/10 p-3 text-white transition hover:bg-white/20"
+		>
+			→
+		</button>
+	</div>
+	<div class="mt-6 flex justify-center gap-3">
+		{#each testimonials as _, i}
+			<button
+				onclick={() => goTo(i)}
+				class={`h-3 w-3 rounded-full transition-all duration-300 ease-in-out ${currentIndex === i ? 'w-6 bg-[#B9FF66]' : 'bg-white/30'}`}
+			>
+			</button>
+		{/each}
+	</div>
 </div>
