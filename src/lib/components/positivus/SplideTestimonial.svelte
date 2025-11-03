@@ -71,6 +71,7 @@
 		bind:this={splide}
 		options={{
 			type: 'loop',
+			autoplay: true,
 			perPage: 1,
 			gap: '3rem',
 			focus: 'center',
@@ -91,28 +92,33 @@
 			</SplideSlide>
 		{/each}
 	</Splide>
-	<div class="mt-6 flex items-center justify-between">
-		<button
-			onclick={goPrev}
-			class="rounded-full bg-white/10 p-3 text-white transition hover:bg-white/20"
-		>
-			←
-		</button>
-
-		<button
-			onclick={goNext}
-			class="rounded-full bg-white/10 p-3 text-white transition hover:bg-white/20"
-		>
-			→
-		</button>
-	</div>
-	<div class="mt-6 flex justify-center gap-3">
-		{#each testimonials as _, i}
-			<button
-				onclick={() => goTo(i)}
-				class={`h-3 w-3 rounded-full transition-all duration-300 ease-in-out ${currentIndex === i ? 'w-6 bg-[#B9FF66]' : 'bg-white/30'}`}
-			>
-			</button>
-		{/each}
+	<div class="flex justify-center">
+		<div class="flex w-lg items-center justify-between px-8">
+			<div>
+				<button
+					onclick={goPrev}
+					class="rounded-full bg-white/10 p-3 text-white transition hover:bg-white/20"
+				>
+					<img src="/positivus/dark-arrow.png" class="w-5 rotate-180" />
+				</button>
+			</div>
+			<div class="flex justify-center gap-3">
+				{#each testimonials as _, i}
+					<button
+						onclick={() => goTo(i)}
+						class={`h-3 w-3 rounded-full transition-all duration-300 ease-in-out ${currentIndex === i ? 'w-6 bg-[#B9FF66]' : 'bg-white/30'}`}
+					>
+					</button>
+				{/each}
+			</div>
+			<div>
+				<button
+					onclick={goNext}
+					class="rounded-full bg-white/10 p-3 text-white transition hover:bg-white/20"
+				>
+					<img src="/positivus/dark-arrow.png" class="w-5" />
+				</button>
+			</div>
+		</div>
 	</div>
 </div>
