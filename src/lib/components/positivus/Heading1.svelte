@@ -3,7 +3,9 @@
 </script>
 
 <h1
-	class="grotesk text-[43px] leading-12 font-medium tracking-wide md:text-5xl md:leading-16 lg:text-6xl lg:leading-18 xl:leading-20"
+	class="grotesk text-4xl md:text-5xl lg:text-6xl font-bold tracking-wide md:leading-16 lg:leading-18 xl:leading-20"
 >
 	{text}
+
+	
 </h1>
