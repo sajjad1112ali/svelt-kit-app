@@ -2,7 +2,7 @@
 </script>
 
 <section class="pt-[70px]">
-	<div class="">
+	<div>
 		<div
 			class="grid
         grid-cols-1

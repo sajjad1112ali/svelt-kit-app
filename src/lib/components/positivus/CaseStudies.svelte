@@ -5,7 +5,7 @@
 
 <section class="pt-[70px]">
 	<div class="flex flex-col items-center gap-4 sm:flex-row">
-		<Heading2 text="Case Studies" />
+		<Heading2 text="Case Studies" classes="bg-[#B9FF66]" />
 		<div class="max-w-md sm:max-w-2xl">
 			<Paragraph
 				text="Explore Real-Life Examples of Our Proven Digital Marketing Success through Our Case Studies"

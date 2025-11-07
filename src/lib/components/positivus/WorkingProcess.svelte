@@ -52,7 +52,7 @@
 		</div>
 	</div>
 
-	<div class="space-y-4 py-20">
+	<div class="space-y-4 pt-20">
 		{#each accordionItems as item, i}
 			<AccordionItem heading={item.title} content={item.content} index={i + 1} />
 		{/each}
