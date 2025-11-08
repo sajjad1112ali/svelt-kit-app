@@ -1,5 +1,15 @@
 @import 'tailwindcss';
 @plugin '@tailwindcss/typography';
 .grotesk {
-    font-family: 'Space Grotesk', sans-serif;
-  }
+	font-family: 'Space Grotesk', sans-serif;
+}
+
+@keyframes floaty { 0% { transform: translateY(0px) } 50% { transform: translateY(-8px) } 100% { transform: translateY(0px) } }
+  .floaty { animation: floaty 4s ease-in-out infinite; }
+  /* soft glow used across components */
+  .glow { box-shadow: 0 6px 30px rgba(132, 94, 255, 0.18); }
+
+  html, body {
+  scroll-behavior: auto; /* disable native smooth scroll */
+  overflow-x: hidden;
+}

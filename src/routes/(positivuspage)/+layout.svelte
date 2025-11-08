@@ -22,7 +22,7 @@
 
 	<div class="flex-1">
 		<Navbar />
-		<div class=" {WIDTH_CLASS} mx-auto">
+		<div class=" {WIDTH_CLASS}">
 			{@render children?.()}
 
 			<Footer />

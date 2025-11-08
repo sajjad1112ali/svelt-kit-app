@@ -16,17 +16,17 @@
         },
         { 
             id: 3, 
-            title: "Personal Blog", 
-            description: "Minimalist design focused on content.", 
+            title: "Personal Portfolio", 
+            description: "Personal portfolio website to display my skills and projects.", 
             color: "bg-red-500", 
-            href: "/blog" 
+            href: "/portfolio" 
         },
         { 
             id: 4, 
-            title: "Task Management App UI", 
-            description: "A clean and functional dashboard concept.", 
+            title: "Agency Website", 
+            description: "A clean and functional agency website.", 
             color: "bg-yellow-500", 
-            href: "/dashboard" 
+            href: "/agency-website" 
         },
     ];
 </script>
