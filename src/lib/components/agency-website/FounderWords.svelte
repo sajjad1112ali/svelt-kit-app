@@ -3,7 +3,6 @@
 	import Heading5 from './Heading5.svelte';
 	import Text from './Text.svelte';
 	import Heading3 from './Heading3.svelte';
-	import VIdeo from './Video.svelte';
 	import TextBig from './TextBig.svelte';
 	import TextSmall from './TextSmall.svelte';
 </script>
@@ -28,7 +27,6 @@
 						alt="quote"
 					/>
 
-					<!-- Heading -->
 					<Heading3
 						text="Digital agency is a business you hire to outsource your digital marketing efforts"
 						classes="relative z-10 text-white"
