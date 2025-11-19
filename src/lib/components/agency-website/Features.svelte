@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { AGENCY_WEBSITE_WIDTH_CLASS } from '$lib/components/positivus/utils/constants';
-	import Button from './Button.svelte';
 	import Heading5 from './Heading5.svelte';
 	import Text from './Text.svelte';
 	import Heading2 from './Heading2.svelte';
@@ -14,7 +13,7 @@
 
 <div class="pb-40">
 	<section class={AGENCY_WEBSITE_WIDTH_CLASS}>
-		<div class="flex flex-col items-center justify-between gap-8 md:flex-row">
+		<div class="flex flex-col-reverse md:flex-row items-center justify-between gap-8">
 			<div class="flex max-w-[470px] flex-col">
 				<div>
 					<Heading5 text="Features" classes="text-[#EF6D58]" />
@@ -37,11 +36,13 @@
 					{/each}
 				</div>
 			</div>
-			<img
+			<div>
+				<img
 				src="/agency-website/features.png"
-				class="h-[586px] w-[566px] object-cover"
+				class="h-auto w-full object-cover lg:h-[586px] md:w-[566px]"
 				alt="Agency Design"
 			/>
+			</div>
 		</div>
 	</section>
 </div>

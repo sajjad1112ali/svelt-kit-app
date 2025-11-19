@@ -11,7 +11,7 @@
 		<div class="flex flex-col items-center justify-between gap-8 md:flex-row">
 			<img
 				src="/agency-website/agency-design.png"
-				class="h-[586px] w-[566px] object-cover"
+				class="md:h-[586px] md:w-[566px] object-cover"
 				alt="Agency Design"
 			/>
 			<div class="flex max-w-[470px] flex-col">

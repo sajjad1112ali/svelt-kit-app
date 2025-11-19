@@ -67,7 +67,7 @@
 					<Text text="Contact Us" classes="text-[#391400]" />
 				</div>
 			</div>	
-			<div class="grid grid-cols-1 border border-[#F3D1BF] divide-y max-w-[570px]">
+			<div class="grid grid-cols-1 border border-[#F3D1BF] divide-y max-w-[570px] mx-auto">
 				{#each accordionItems as item, i}
 					<AccordionItem heading={item.title} content={item.content} index={i + 1} isLast={accordionItems.length - 1 === i}/>
 				{/each}

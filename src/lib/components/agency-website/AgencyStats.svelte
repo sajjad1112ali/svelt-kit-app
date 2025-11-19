@@ -19,9 +19,10 @@
 </script>
 
 <div class="pb-40">
-	<section class={AGENCY_WEBSITE_WIDTH_CLASS}>
+	<section class="{AGENCY_WEBSITE_WIDTH_CLASS} flex justify-center">
 		<div
-			class="grid grid-cols-1 divide-y divide-[#F3D1BF] rounded-md border border-[#F3D1BF] md:grid-cols-3 md:divide-x md:divide-y-0"
+			class="grid grid-cols-1 divide-y divide-[#F3D1BF] rounded-md border border-[#F3D1BF] md:grid-cols-3 md:divide-x md:divide-y-0 w-80 md:w-full
+"
 		>
 			{#each stats as stat}
 				<div class="flex flex-col gap-3 py-11 pl-12">

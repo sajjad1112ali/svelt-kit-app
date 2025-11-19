@@ -1,14 +1,10 @@
 <script lang="ts">
 	import { AGENCY_WEBSITE_WIDTH_CLASS } from '$lib/components/positivus/utils/constants';
-	import Button from './Button.svelte';
-	import Heading5 from './Heading5.svelte';
-	import Heading1 from './Heading1.svelte';
-	import Text from './Text.svelte';
 </script>
 
 <div class="py-18">
 	<section class="{AGENCY_WEBSITE_WIDTH_CLASS}">
-		<div class="flex flex-col md:flex-row justify-between items-center gap-8">
+		<div class="flex flex-wrap flex-row items-center justify-center md:justify-between gap-x-20 gap-y-6 md:gap-x-8">
 			<img
 				src="/agency-website/digital-inside.png"
 				class="h-[42px] w-[147px] object-cover"

@@ -8,10 +8,10 @@
 
 <div class="pt-26 pb-40">
 	<section class={AGENCY_WEBSITE_WIDTH_CLASS}>
-		<div class="flex flex-col items-center justify-between gap-8 md:flex-row">
+		<div class="grid grid-cols-1 md:grid-cols-2 items-center justify-between gap-8">
 			<img
 				src="/agency-website/digital-products.png"
-				class="h-[586px] w-[566px] object-cover"
+				class="h-auto w-full lg:h-[586px] lg:w-[566px] object-cover"
 				alt="Agency Design"
 			/>
 			<div class="flex max-w-[470px] flex-col">
