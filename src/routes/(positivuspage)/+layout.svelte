@@ -16,10 +16,6 @@
 	/>
 </svelte:head>
 <div class="flex h-screen flex-col">
-	<div class={WIDTH_CLASS}>
-		<HomeLink />
-	</div>
-
 	<div class="flex-1">
 		<Navbar />
 		<div class=" {WIDTH_CLASS}">
