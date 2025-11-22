@@ -1,12 +1,12 @@
 <script>
     const websites = [
-        { 
-            id: 1, 
-            title: "Todo App", 
-            description: "A simple page where you can manage your todos.", 
-            color: "bg-indigo-500", 
-            href: "/todos" 
-        },
+        // { 
+        //     id: 1, 
+        //     title: "Todo App", 
+        //     description: "A simple page where you can manage your todos.", 
+        //     color: "bg-indigo-500", 
+        //     href: "/todos" 
+        // },
         { 
             id: 2, 
             title: "Positivus Landing Page", 
